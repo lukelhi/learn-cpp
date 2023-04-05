@@ -21,7 +21,7 @@ public:
 class Son2 : public Father
 {
 public:
-    std::string getName()
+    std::string getName() override
     {
         std::cout << "i am Son2" << std::endl;
         return "Son2";
@@ -33,7 +33,7 @@ int main()
     //  Father father;
     //  std::string name = father.getName();
 
-    // 对上创建内存
+    // 堆上创建内存
     Father *father = new Father();
     std::string name = father->getName();
 
@@ -43,6 +43,7 @@ int main()
     // s指针对应的内存只有成员变量的相关信息，没有函数相关信息。
     // f2对应的getName函数调用的Father类中的函数
     // 想要调Son类的方法，在Father类函数前面加上virtual
+    // 子类的对象指针，可以通过复制的方式，存储在弗雷德对象指针中，如果子类没有对应方法，调用的是父类的方法
     Father *f2 = s;
     std::string name3 = f2->getName();
 

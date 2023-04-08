@@ -28,11 +28,17 @@ int main()
         // 栈上（自动释放）
         // Tool tool = Tool("tool");
         // Tool tool("tool");
-        Tool Tool; // 调用默认构造函数
+
+        Tool tool;
+
+        // 行注释和代码保持一行距离，防止有小错误看不出来。
+
+        // 调用默认构造函数
         // 下这些都是栈上创建的内存
         // int i = 0;
         // double d = 1.0;
         // 堆上，无法自动释放
+
         tool2 = new Tool("tool2");
     }
 

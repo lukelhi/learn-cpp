@@ -1,48 +1,52 @@
 #include <iostream>
 
-class Father
+class Tool
 {
 public:
-    // 禁掉隐式转化：在构造函数关键字前加上 explicit
-
-    Father() : m_age(29), m_name("y")
+    Tool()
     {
+        std::cout << "create Tool()" << std::endl;
     }
-    Father(std::string name) : m_name(name), m_age(30){};
-    Father(int age) : m_name("y"), m_age(age){};
+    Tool(std::string name) : m_name(name)
+    {
+        std::cout << "create Tool() with name:" << m_name << std::endl;
+    }
+    ~Tool()
+    {
+        std::cout << "delete Tool() with name:" << m_name << std::endl;
+    }
 
 private:
-    int m_age;
     std::string m_name;
 };
 
-void function(Father father)
+int main()
 {
-    Father f_copy = father;
-}
-int main(int, char **)
-{
-    Father f1 = Father();
+    Tool *tool2;
+    std::cout << "start" << std::endl;
+    { // 占用域
+        // 栈上（自动释放）
+        // Tool tool = Tool("tool");
+        // Tool tool("tool");
 
-    Father f4;
-    Father f5(30);
-    Father f6("tom2");
-    Father f7(1.0); // double 走的是int的构造函数
+        Tool tool;
 
-    // 写法一样，编译器内部会自动转为两种的第一种的写法。
+        // 行注释和代码保持一行距离，防止有小错误看不出来。
 
-    Father f2 = Father(29);
-    Father f8 = 29;
+        // 调用默认构造函数
+        // 下这些都是栈上创建的内存
+        // int i = 0;
+        // double d = 1.0;
+        // 堆上，无法自动释放
 
-    Father f3 = Father("tom1");
-    Father f9 = std::string("tom1");
+        tool2 = new Tool("tool2");
+    }
 
-    // 用法
-    function(20);
-
-    std::cout << "Hello, world!\n";
-
-    /*
-    隐式转换：将变量的值赋值给对象。没有将转换过程表现出来。会去对象的构造函数中找对应的类型。
-    */
+    std::cout << "endl" << std::endl;
+    delete (tool2);
+    std::cout << "endl" << std::endl;
+    // 栈上访问内存比较快，是连续的内存。堆上需要通过指针进行间接寻址的过程
+    // 栈上的内存有大小限制，在编译器就完成的。堆上的变量实在运行期的时候创建内存，好处：可以让exe比较小，栈上的连续内存有限，堆上的不连续内存，可以利用内存碎片找到大内存。
+    // 编译器指的是build生成exe期间大小就已经确定了。运行期指的是打开二进制文件exe的时候。
+    return 0;
 }

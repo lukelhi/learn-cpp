@@ -23,3 +23,5 @@
 37：this关键字<br>
 38：const关键字<br>
 39：mutable关键字<br>
+40：函数变量<br>
+41：lambda函数<br>
